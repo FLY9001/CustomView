@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+                android:oneshot="true">
+    <item android:drawable="@drawable/clock_dial" android:duration="1000"/>
+    <item android:drawable="@drawable/clock_hand_hour" android:duration="1000"/>
+    <item android:drawable="@drawable/clock_hand_minute" android:duration="1000"/>
+</animation-list>
+    <!--
+        ImageView rocketImage = (ImageView) findViewById(R.id.rocket_image);
+        rocketImage.setBackgroundResource(R.drawable.frame_animation);
+        AnimationDrawable frame_animation = (AnimationDrawable) animation_frame.getBackground();
+        frame_animation.start();
+    -->

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="rectangle">
+
+    <!--四个角的角度，只适用于矩形-->
+    <corners
+        android:bottomLeftRadius="10dp"
+        android:bottomRightRadius="10dp"
+        android:radius="10dp"
+        android:topLeftRadius="10dp"
+        android:topRightRadius="10dp"/>
+
+    <!--描边,dashGap:虚线间隔-->
+    <stroke
+        android:width="10dp"
+        android:color="@color/colorAccent"
+        android:dashGap="10dp"
+        android:dashWidth="10dp"/>
+
+    <!--纯色填充-->
+    <solid android:color="@color/colorAccent"/>
+
+    <!--渐变效果，与<solid>标签互斥，type：渐变类型，线性、径向、扫描-->
+    <gradient
+        android:angle="10"
+        android:centerColor="@color/colorAccent"
+        android:centerX="10"
+        android:centerY="10"
+        android:endColor="@color/colorAccent"
+        android:gradientRadius="10"
+        android:startColor="@color/colorAccent"
+        android:type="linear"
+        android:useLevel="false"/>
+
+    <!--包含它的View的空白-->
+    <padding
+        android:bottom="10dp"
+        android:left="10dp"
+        android:right="10dp"
+        android:top="10dp"/>
+
+    <!--shape的大小，表示shape的固有大小，并不代表最终显示大小-->
+    <size
+        android:width="10dp"
+        android:height="10dp"/>
+</shape>

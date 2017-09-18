@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+     android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+     android:shareInterpolator="true">
+    <!--是否共享插值器-->
+    <!--可自定义插值器-->
+    <alpha
+        android:fromAlpha="0"
+        android:toAlpha="0"/>
+    <scale
+        android:fromXScale="0"
+        android:fromYScale="0"
+        android:pivotX="0"
+        android:pivotY="0"
+        android:toXScale="0"
+        android:toYScale="0"/>
+    <translate
+        android:fromXDelta="0"
+        android:fromYDelta="0"
+        android:toXDelta="0"
+        android:toYDelta="0"/>
+    <rotate
+        android:fromDegrees="0"
+        android:pivotX="0"
+        android:pivotY="0"
+        android:toDegrees="0"/>
+    <set>
+        ...
+    </set>
+</set>
+    <!--
+        ImageView image = (ImageView) findViewById(R.id.image);
+        Animation tween_animation = AnimationUtils.loadAnimation(this, R.anim.tween_animation);
+        image.startAnimation(tween_animation);
+    -->

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+        android:antialias="true"
+        android:dither="true"
+        android:filter="true"
+        android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|clip_vertical|clip_horizontal"
+        android:mipMap="false"
+        android:src="@mipmap/ic_launcher"
+        android:tileMode="disabled"/>
+    <!--
+        android:antialias  抗锯齿功能（优化图片显示效果的作用）
+        android:dither 抖动效果（优化图片显示效果的作用）
+        android:filter 过滤效果（优化图片显示效果的作用）
+        android:gravity 定位图片
+        android:mipMap 纹理映射（不常用）
+        android:src  图片的资源ID，必有的属性。
+        android:tileMode 平铺模式（当开启这个模式时，gravity属性会被忽略）共有四种模式：
+        disabled——关闭平铺模式；repeat——水平和垂直方向上的平铺效果；clamp——图片四周的像素会扩展到周围区域。mirror——水平和垂直方向上的镜面投影效果。
+    -->

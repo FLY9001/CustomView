@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+     android:ordering="sequentially">
+    <!--播放顺序-->
+    <objectAnimator
+        android:duration="1"
+        android:propertyName="translateY"
+        android:repeatCount="1"
+        android:repeatMode="restart"
+        android:startOffset="1"
+        android:valueFrom="0"
+        android:valueTo="90"
+        android:valueType="intType"/>
+    <!--startOffset：延迟时间-->
+    <!--valueType：property的类型-->
+
+    <!--animator：只是单纯的对值进行操作，没有propertyName-->
+    <animator
+        android:duration="1"
+        android:repeatCount="1"
+        android:repeatMode="reverse"
+        android:startOffset="1"
+        android:valueFrom="float | int | color"
+        android:valueTo="float | int | color"
+        android:valueType="floatType"/>
+    <set>
+        ...
+    </set>
+</set>
+    <!--
+        AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.property_animator);
+        set.setTarget(view);
+        set.start();
+    -->
+    <!--
+        ObjectAnimator moveIn = ObjectAnimator.ofFloat(textview, "translationX", -500f, 0f);
+        ObjectAnimator rotate = ObjectAnimator.ofFloat(textview, "rotation", 0f, 360f);
+        ObjectAnimator fadeInOut = ObjectAnimator.ofFloat(textview, "alpha", 1f, 0f, 1f);
+        AnimatorSet animSet = new AnimatorSet();
+        animSet.play(rotate).with(fadeInOut).after(moveIn);& animSet.playTogether(moveIn,rotate,fadeInOut);
+        animSet.setDuration(5000);
+        animSet.start();
+    -->
