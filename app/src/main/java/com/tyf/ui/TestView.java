@@ -111,7 +111,8 @@ public class TestView extends LinearLayout {
 
 //                                 View的绘制流程
 //**************************************************************************************************
-
+//绘制源码分析：http://mp.weixin.qq.com/s?__biz=MzI0MjE3OTYwMg==&mid=401462221&idx=1&sn=dda1f3500c993d643dcdae6dd2cc3d6f&scene=21#wechat_redirect
+//绘制流程图解：http://blog.csdn.net/yanbober/article/details/46128379
     //performTraversals->
     //测量后，设置自己宽高，performMeasure->measure->onMeasure
     @Override
