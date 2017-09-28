@@ -29,7 +29,34 @@
     </set>
 </set>
     <!--
-        ImageView image = (ImageView) findViewById(R.id.image);
+        pivotX取值举例：10、10%、10%p；距自身左侧10像素处、距自身左侧10%自身宽度处、距父布局左侧10%自身宽度处
+    -->
+    <!--
         Animation tween_animation = AnimationUtils.loadAnimation(this, R.anim.tween_animation);
         image.startAnimation(tween_animation);
+
+        //创建动画，参数表示他的子动画是否共用一个插值器
+        AnimationSet animationSet = new AnimationSet(true);
+        //添加动画
+        animationSet.addAnimation(new AlphaAnimation(1.0f, 0.0f));
+        //设置插值器
+        animationSet.setInterpolator(new LinearInterpolator());
+        //设置动画持续时长
+        animationSet.setDuration(3000);
+        //设置动画结束之后是否保持动画的目标状态
+        animationSet.setFillAfter(true);
+        //设置动画结束之后是否保持动画开始时的状态
+        animationSet.setFillBefore(false);
+        //设置重复模式
+        animationSet.setRepeatMode(AnimationSet.REVERSE);
+        //设置重复次数
+        animationSet.setRepeatCount(AnimationSet.INFINITE);
+        //设置动画延时时间
+        animationSet.setStartOffset(2000);
+        //取消动画
+        animationSet.cancel();
+        //释放资源
+        animationSet.reset();
+        //开始动画
+        mIvImg.startAnimation(animationSet);
     -->

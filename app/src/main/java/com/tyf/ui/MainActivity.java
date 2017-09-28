@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
                 StaggerLayout.class,    //完全自定义ViewGroup(重写)
                 //扩展已有View(如密码输入EditText)
                 //扩展已有ViewGroup(inflate)
-        };
 
-        Class[] animation = {};
+                TestAnim.class          //动画
+        };
     }
 
     public void onClick(View view) {
