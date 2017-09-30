@@ -7,6 +7,8 @@ import android.view.View;
 import com.tyf.ui.viewprinciple.AnalogClock;
 import com.tyf.ui.viewprinciple.StaggerLayout;
 import com.tyf.ui.viewprinciple.ViewPrincipleActivity;
+import com.tyf.ui.viewwidget.ListViewFragment;
+import com.tyf.ui.viewwidget.RecyclerFragment;
 import com.tyf.ui.viewwidget.ViewWidgetActivity;
 
 
@@ -24,7 +26,10 @@ public class MainActivity extends AppCompatActivity {
                 //扩展已有View(如密码输入EditText)
                 //扩展已有ViewGroup(inflate)
 
-                TestAnim.class          //动画
+                TestAnim.class,          //动画
+
+                ListViewFragment.class,
+                RecyclerFragment.class,
         };
     }
 
