@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Class[] view = {
                 TestView.class,         //View的基本参数、初始化、绘制流程、事件体系
                 AnalogClock.class,      //完全自定义View(重写onDraw)

@@ -20,34 +20,19 @@ import android.widget.LinearLayout;
 import android.widget.Scroller;
 
 /**
- * Created by 1 on 2017/6/30 0030.
+ *
  */
 
 public class TestView extends LinearLayout {
     private void test() {
-        /**
-         * 坐标
-         */
-        int left = getLeft();   //相对父容器的四坐标
-        int top = getTop();
-        int right = getRight();
-        int bottom = getBottom();
-        int width = right - left;
-        int herght = bottom - top;
+        //***************************************************
+        coordinate();               //View坐标系
+        new TestView(null);         //View初始化，自定义属性
+        testDraw();                 //View绘制流程
+        dispatchTouchEvent(null);   //View事件体系
 
-        float x = getX();       //相对父容器的当前左顶点坐标,及相对四坐标的偏移量，x=left+translationX
-        float y = getY();
-        float translationX = getTranslationX();
-        float translationY = getTranslationY();
-
-        /**
-         * 滑动
-         */
-        scrollBy(10, 10);       //相对滑动，与绝对滑动（针对View中内容的滑动）
-        scrollTo(getScrollX() + 10, getScrollY() + 10);
-        ObjectAnimator.ofFloat(this, "translationX", 0, 10).setDuration(1000).start();//动画滑动
-        ((ViewGroup.MarginLayoutParams) getLayoutParams()).leftMargin += 10;          //参数滑动
-        requestLayout();
+        testScroll();               //View滑动
+        //***************************************************
 
         /**
          * 动态获取View的宽高
@@ -72,6 +57,46 @@ public class TestView extends LinearLayout {
             }
         });
 
+    }
+
+    /**
+     * View坐标系
+     */
+    void coordinate() {
+        int xy = R.drawable.xy;
+
+        int left = getLeft();   //相对父容器的四坐标
+        int top = getTop();
+        int right = getRight();
+        int bottom = getBottom();
+        int width = getWidth(); //宽高，width = right - left，herght = bottom - top
+        int herght = getHeight();
+
+        float x = getX();       //相对父容器的当前左顶点坐标,及相对四坐标的偏移量，x=left+translationX
+        float y = getY();
+        float translationX = getTranslationX();
+        float translationY = getTranslationY();
+    }
+
+    /**
+     * 6种滑动实现方式
+     */
+    void testScroll() {
+        layout(0, 0, 0, 0);         //布局四顶点
+
+        offsetLeftAndRight(0);      //对left和right进行偏移
+        offsetTopAndBottom(0);      //对top和bottom进行偏移
+
+        ((ViewGroup.MarginLayoutParams) getLayoutParams()).leftMargin += 10;          //参数滑动
+        requestLayout();
+        //setLayoutParams(getLayoutParams());
+
+        ObjectAnimator.ofFloat(this, "translationX", 0, 10).setDuration(1000).start();//动画滑动，也可是其他动画
+
+        scrollBy(10, 10);           //相对滑动，（针对View中内容的滑动）
+        scrollTo(getScrollX() + 10, getScrollY() + 10);//绝对滑动
+
+        smoothScrollTo(0, 0);       //通过scroller实现平滑滑动
     }
 
 //                                 View的初始化
@@ -109,23 +134,37 @@ public class TestView extends LinearLayout {
         //setWeight(str_weight);
     }
 
-//                                 View的绘制流程
+    //                                 View的绘制流程
 //**************************************************************************************************
 //绘制源码分析：http://mp.weixin.qq.com/s?__biz=MzI0MjE3OTYwMg==&mid=401462221&idx=1&sn=dda1f3500c993d643dcdae6dd2cc3d6f&scene=21#wechat_redirect
 //绘制流程图解：http://blog.csdn.net/yanbober/article/details/46128379
-    //performTraversals->
+
+    void testDraw() {
+        //ViewRoot的performTraversals执行遍历，分别执行performMeasure、performLayout、performDraw
+        measure(0, 0);      //测量自身及遍历测量子View（onMeasure）
+        layout(0, 0, 0, 0); //依次布局自己（确定四顶点），遍历布局子View（onLayout）
+        draw(null);         //依次绘制背景，绘制自己（onDraw），遍历绘制子View，绘制装饰（如scrollBars）
+
+        //都会触发ViewRoot的performTraversals完成遍历
+        requestLayout();    //触发onMeasure、onLayout；只有四坐标发生改变才触发onDraw
+        invalidate();       //重绘，触发onDraw，只能在UI线程使用
+        postInvalidate();   //可在分线程使用
+    }
+
     //测量后，设置自己宽高，performMeasure->measure->onMeasure
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        //TODO ViewGroup在此遍历子View的measre()方法测量子View
 
+        //TODO 在此设置自身宽高
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);//MeasureSpec由SpecMode和SpecSize组成
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
 
         setMeasuredDimension(getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec),//设置宽高
-                getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec));          //此为系统默认得到测量宽高方法，可自定义
+                getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec));          //getDefaultSize为系统默认得到测量宽高方法，可自定义
 
-        getMeasuredWidth();         //测量宽高（不是最终）
+        getMeasuredWidth();         //可测量宽高（不代表最终宽高）
         getMeasuredHeight();
     }
 
@@ -133,9 +172,9 @@ public class TestView extends LinearLayout {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
+        //TODO ViewGroup在此遍历子View的layout()方法布局子View
 
-        //可得到四坐标
-        getWidth();                 //最终宽高
+        getWidth();                 //可得到四坐标、最终宽高
         getHeight();
     }
 
@@ -143,12 +182,13 @@ public class TestView extends LinearLayout {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        //TODO 在此绘制内容，可在canvas上画
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        //在此，可停止线程及动画
+        //在此可停止线程及动画
     }
 
 //                                 View的事件体系
@@ -226,6 +266,8 @@ public class TestView extends LinearLayout {
         super.setOnClickListener(l);
     }
 
+//**************************************************************************************************
+
     Scroller mScroller = new Scroller(getContext());
 
     /**
@@ -242,9 +284,11 @@ public class TestView extends LinearLayout {
     public void computeScroll() {
         if (mScroller.computeScrollOffset()) {
             scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
-            postInvalidate();
+            postInvalidate();//通过不断的重绘不断的调用computeScroll方法
         }
     }
+
+//**************************************************************************************************
 
     /**
      * “内存重启”时，数据的保存与恢复

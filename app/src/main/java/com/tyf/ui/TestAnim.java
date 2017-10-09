@@ -89,14 +89,12 @@ public class TestAnim extends Activity {
         });
         animator.start();
 //---------------------------------------------------------------------
-
         //Layout动画，ViewGroup中子View的出场动画
         Animation layout_animation = AnimationUtils.loadAnimation(this, R.anim.layout_animation);
         LayoutAnimationController controller = new LayoutAnimationController(layout_animation);
         controller.setDelay(0.5f);
         new ListView(this).setLayoutAnimation(controller);
 //---------------------------------------------------------------------
-
         //activity切换效果，在startActivity()或finish()之后调用
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_in_left);
     }
